@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Criar conta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="submitForm()" >
+
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input type="text" formControlName="nome"></ion-input>
+    </ion-item>
+    <div class="validation-error">
+      <ng-container class="messageError" *ngFor="let validation of validationMessages.nome">
+        <div *ngIf="form.get('nome').hasError(validation.type) && (form.get('nome').dirty || form.get('nome').touched)">
+          <ion-text color="danger">{{ validation.message }}</ion-text>
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Nome de usuário</ion-label>
+      <ion-input type="text" formControlName="login"></ion-input>
+    </ion-item>
+    <div class="validation-error">
+      <ng-container class="messageError" *ngFor="let validation of validationMessages.login">
+        <div *ngIf="form.get('login').hasError(validation.type) && (form.get('login').dirty || form.get('login').touched)">
+          <ion-text color="danger">{{ validation.message }}</ion-text>
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label>Nível de acesso</ion-label>
+      <ion-select formControlName="nivel" placeholder="Selecione">
+        <ion-select-option value="comum">Usuário comum</ion-select-option>
+        <ion-select-option value="admin">Administrador</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input type="password" formControlName="senha"></ion-input>
+    </ion-item>
+    <div class="validation-error">
+      <ng-container class="messageError" *ngFor="let validation of validationMessages.senha">
+        <div *ngIf="
+          form.get('senha').hasError(validation.type) && 
+          (form.get('senha').dirty || form.get('senha').touched)
+        ">
+          <ion-text color="danger">{{ validation.message }}</ion-text>
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Confirme a senha</ion-label>
+      <ion-input type="password" formControlName="confirmaSenha"></ion-input>
+    </ion-item>
+    <div class="validation-error">
+      <ng-container class="messageError" *ngFor="let validation of validationMessages.confirmaSenha">
+        <div *ngIf="
+          form.get('confirmaSenha').hasError(validation.type) && 
+          (form.get('confirmaSenha').dirty || form.get('confirmaSenha').touched)
+        ">
+          <ion-text color="danger">{{ validation.message }}</ion-text>
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-button type="submit" expand="block" [disabled]="!form.valid">Registrar conta</ion-button>
+    <ion-button (click)="navigateBack()" expand="block">Voltar</ion-button>
+
+  </form>
+</ion-content>

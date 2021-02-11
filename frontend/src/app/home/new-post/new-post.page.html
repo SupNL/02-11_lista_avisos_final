@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>new-post</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="submitForm()" >
+
+    <ion-item>
+      <ion-label position="floating">Mensagem</ion-label>
+      <ion-textarea type="text" formControlName="message"></ion-textarea>
+    </ion-item>
+    <div class="validation-error">
+      <ng-container class="messageError" *ngFor="let validation of validationMessages.message">
+        <div *ngIf="form.get('message').hasError(validation.type) && (form.get('message').dirty || form.get('message').touched)">
+          <ion-text color="danger">{{ validation.message }}</ion-text>
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label>Tipo de aviso</ion-label>
+      <ion-select formControlName="type" placeholder="Selecione">
+        <ion-select-option value="suggestion">Sugestão</ion-select-option>
+        <ion-select-option value="criticism">Crítica</ion-select-option>
+        <ion-select-option value="compliment">Elogio</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button [disabled]="photoService.photos.length >= 5" (click)="addPhotoToGallery()" color="success" expand="block">Adicionar foto</ion-button>
+    <ion-button *ngIf="photoService.photos.length > 0" expand="block" color="warning" (click)="toggleShowMore()">
+      {{showMore ? "Esconder imagens" : "Mostrar imagens"}}
+    </ion-button>
+    <ion-button *ngIf="photoService.photos.length > 0 && showMore" expand="block" color="danger" (click)="removeLastPhoto()">
+      Remover última foto
+    </ion-button>
+    <div *ngIf="showMore">
+      <ion-card *ngIf="photoService.photos.length > 0">
+        <ion-img *ngFor="let photo of photoService.photos" [src]="photo.url"></ion-img>
+      </ion-card>
+    </div>
+
+    <ion-button type="submit" expand="block" [disabled]="!form.valid">Submeter aviso</ion-button>
+
+  </form>
+</ion-content>
+

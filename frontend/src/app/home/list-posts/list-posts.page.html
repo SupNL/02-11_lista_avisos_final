@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="post-list">
+    <ion-item *ngIf="postList && postList.length == 0">Não há avisos disponíveis.</ion-item> 
+    <ion-item class="ion-no-padding" *ngFor="let post of postList">
+      <div>
+        <ion-header>
+          <ion-text [ngClass]="{
+            'category-red' : post.type == 'criticism',
+            'category-yellow' : post.type == 'suggestion',
+            'category-green' : post.type == 'compliment'
+          }">{{postService.getPostType(post)}}</ion-text>
+          <ion-text>{{postService.stringifyDate(post.date)}}</ion-text>
+        </ion-header>
+        <ion-text>{{post.message}}</ion-text>
+        <ion-button *ngIf="post.images && post.images.length > 0" expand="block" (click)="toggleShowMore(post.id)">
+          {{showMore.includes(post.id) ? "Esconder imagens" : "Mostrar imagens"}}
+        </ion-button>
+        <div *ngIf="showMore.includes(post.id)">
+          <ion-card *ngIf="post.images && post.images.length > 0">
+            <img *ngFor="let image of post.images" src="{{postService.getPostImageUrl(image)}}" />
+          </ion-card>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title slot="start">Avisos</ion-title>
+    <ion-title slot="end" class="logout" (click)="logout()">Sair</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="list-posts">
+        <ion-label>Aviso</ion-label>
+        <ion-icon name="reader-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="new-post">
+        <ion-label>Novo aviso</ion-label>
+        <ion-icon name="document-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="pending-posts" *ngIf="getUserLevel() == 'admin'">
+        <ion-label>Avisos pendentes</ion-label>
+        <ion-icon name="file-tray-full-outline"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

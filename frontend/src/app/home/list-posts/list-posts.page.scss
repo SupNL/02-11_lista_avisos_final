@@ -1,0 +1,47 @@
+.category-red {
+  color: var(--ion-color-danger-shade);
+}
+
+.category-yellow {
+  color: var(--ion-color-warning-shade);
+}
+
+.category-green {
+  color: var(--ion-color-success-shade);
+}
+
+.post-list ion-item div {
+  padding: 16px;
+  width: 100%;
+}
+
+.post-list ion-item div div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post-list ion-item div ion-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.post-list ion-item div ion-card {
+  align-self: center;
+  width: auto;
+}
+
+.post-list ion-item div ion-card img {
+  margin-bottom: 16px;
+}
+
+.post-list ion-item div ion-button {
+  margin-top: 14px;
+  min-height: 24px;
+}
+
+.post-list ion-item div ion-card img {
+    max-height: 360px;
+}
